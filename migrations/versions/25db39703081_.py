@@ -1,8 +1,8 @@
-"""movie and director tables
+"""empty message
 
-Revision ID: f93727760f4b
+Revision ID: 25db39703081
 Revises: 
-Create Date: 2019-05-02 17:34:41.990616
+Create Date: 2019-05-03 03:20:18.933124
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = 'f93727760f4b'
+revision = '25db39703081'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -22,6 +22,7 @@ def upgrade():
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('name', sa.String(length=140), nullable=True),
     sa.Column('imdb', sa.String(length=56), nullable=True),
+    sa.Column('profile', sa.String(length=256), nullable=True),
     sa.PrimaryKeyConstraint('id')
     )
     op.create_table('movie',

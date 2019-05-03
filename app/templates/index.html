@@ -1,9 +1,42 @@
-{% extends "base.html" %}
+{% extends 'base.html' %}
 
-{% block content %}
-    <h1>Search for Movies that are now in cinemas in Greece!</h1>
-    <form action="" method="post" novalidate>
+{% block app_content %}
+<div class="container">
+  <h2>Movies currently being shown in Greece</h2>
+  {% for movie in movies %}
+    {% if loop.index == 1 or loop.index % 3 == 1 %}
+    <div class="row top-margin-lg">
+    {% endif %}
+        <div class="col-md-4">
+          <div class="card">
+            <div class="card-img-top"><img src="https://image.tmdb.org/t/p/w300{{ movie.poster_path }}" alt="Placeholder image" class="product-img"></div>
+            <div class="card-title">{{ movie.title }}</div>
+            <div class="card-subtitle">{{ movie.original_title }}</div>
+            <div class="card-text"><p>{{ movie.description }}</p></div>
+          </div> <!-- ends card -->
+        </div> <!-- ends col 12 for card -->
+    {% if loop.index % 3 == 0 or loop.length == loop.index %}
+    </div> <!-- ends row for card -->
+    {% endif %}
+  {% endfor %}
 
-        <p>{{ form.submit() }}</p>
-    </form>
+  <h2>Directors of movies being shown</h2>
+  {% for director in directors %}
+    {% if loop.index == 1 or loop.index % 3 == 1 %}
+    <div class="row top-margin-lg">
+    {% endif %}
+        <div class="col-md-4">
+          <div class="card">
+
+            <div class="card-title">{{ director.name }}</div>
+            <div class="card-subtitle">{{ director.imdb }}</div>
+            <div class="card-text"><a href="{{ director.profile }}">{{ director.profile }}</a></div>
+          </div> <!-- ends card -->
+        </div> <!-- ends col 12 for card -->
+    {% if loop.index % 3 == 0 or loop.length == loop.index %}
+    </div> <!-- ends row for card -->
+    {% endif %}
+  {% endfor %}
+
+</div> <!-- ends container !-->
 {% endblock %}
