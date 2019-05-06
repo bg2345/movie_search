@@ -59,8 +59,8 @@ def index():
             original_title = movie['original_title']
             )
 
-        db.session.add(movie)
-        db.session.commit()
+        # db.session.add(movie)
+        # db.session.commit()
 
     for director in directors:
         director = Director(
@@ -70,8 +70,8 @@ def index():
             profile = director['profile']
         )
 
-        db.session.add(director)
-        db.session.commit()
+        # db.session.add(director)
+        # db.session.commit()
 
 
     return render_template('index.html', title='Home', movies=movies, directors=directors)
