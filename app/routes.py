@@ -46,9 +46,12 @@ def index():
                 row['name'] = result['name']
                 dir_profile = 'https://api.themoviedb.org/3/person/{}?api_key=bbb0e77b94b09193e6f32d5fac7a3b9c&language=en-US'.format(result['id'])
                 row['imdb'] = dir_title
+                # dir_url.append(dir_profile)
+
+                # url_json = requests.get(dir_profile).json()
+                # print(url_json['imdb_id'])
                 row['profile'] = dir_profile
 
-                dir_url.append(dir_profile)
                 directors.append(row)
 
     for movie in movies:
