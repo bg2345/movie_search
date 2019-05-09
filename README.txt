@@ -13,4 +13,4 @@
    h. export FLASK_APP=main.py
    i. export FLASK_DEBUG=1
    j. flask run
-3. Now that Flask is running, you should be able to go to http://localhost:5000/ in a browser to access the application. When it loads it will show you the current movies that are being shown in theaters in Greece, as well as the directors. It will also save this information to a SQLite database (work in progress).
+3. Now that Flask is running, you should be able to go to http://localhost:5000/ in a browser to access the application. When it loads it will allow you to search for the current movies that are being shown in theaters in a select number of countries, as well as the directors.
