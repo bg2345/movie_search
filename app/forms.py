@@ -1,11 +1,6 @@
 from flask_wtf import FlaskForm
-from wtforms import SubmitField
+from wtforms import SubmitField, SelectField
 
 class SubmitForm(FlaskForm):
-    submit = SubmitField('See Movie Info')
-
-class ShowDirector(FlaskForm):
-    submit = SubmitField('See Director Info')
-
-class GetDirectorLink(FlaskForm):
-    submit = SubmitField('Get Director IMDB Link')
+    country = SelectField(u'Country', choices=[('US', 'United States'), ('PL', 'Poland'), ('IN', 'India'), ('FI', 'Finland'), ('CN', 'China')])
+    submit = SubmitField('Choose Country')

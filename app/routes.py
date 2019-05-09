@@ -1,17 +1,46 @@
-from flask import render_template, flash, redirect, url_for
+from flask import render_template, flash, redirect, url_for, request
 from app import app, db
-from app.forms import SubmitForm, ShowDirector, GetDirectorLink
+from app.forms import SubmitForm
 from app.models import Movie, Director
 import requests
 
-@app.route('/')
+@app.route('/', methods=['GET', 'POST'])
 @app.route('/index', methods=['GET', 'POST'])
 def index():
 
+    form = SubmitForm()
+    country = form.country.data
 
-    url = 'https://api.themoviedb.org/3/movie/now_playing?api_key=bbb0e77b94b09193e6f32d5fac7a3b9c&language=en-US&page=1&region=GR'
+    if form.validate_on_submit():
+
+        country = form.country.data
+        print(form.country.data)
+
+        return redirect(url_for('movies', country=country))
+
+    return render_template('index.html', title='Home', country=country, form=form)
+
+
+@app.route('/movies', methods=['GET', 'POST'])
+def movies():
+
+    country = request.args.get('country')
+
+    country_names = {
+    'US': 'United States',
+    'PL': 'Poland',
+    'IN': 'India',
+    'CN': 'China',
+    'FI': 'Finland'
+    }
+
+    country_name = country_names[country]
+    
+
+    url = 'https://api.themoviedb.org/3/movie/now_playing?api_key=bbb0e77b94b09193e6f32d5fac7a3b9c&language=en-US&page=1&region={}'.format(country)
     movies_json = requests.get(url).json()
 
+    print(url)
 
     movies = []
     ids = []
@@ -77,4 +106,4 @@ def index():
         # db.session.commit()
 
 
-    return render_template('index.html', title='Home', movies=movies, directors=directors)
+    return render_template('movies.html', title='Movies', movies=movies, directors=directors, country=country, country_name=country_name)

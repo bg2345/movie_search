@@ -1,29 +1,14 @@
 {% extends 'base.html' %}
+{% import 'bootstrap/wtf.html' as wtf %}
+
 
 {% block app_content %}
 <div class="container">
-  <h2>Movies currently being shown in Greece</h2>
-  {% for movie in movies %}
-    {% if loop.index == 1 or loop.index % 3 == 1 %}
-    <div class="row top-margin-lg">
-    {% endif %}
-        <div class="col-md-4">
-          <div class="card">
-            <div class="card-img-top"><img src="https://image.tmdb.org/t/p/w300{{ movie.poster_path }}" alt="Placeholder image" class="product-img"></div>
-            <div class="card-title">{{ movie.title }}</div>
-            <div class="card-subtitle">Original Title: {{ movie.original_title }}</div>
-            <div class="card-text"><p>{{ movie.description }}</p></div>
-            {% for director in directors %}
-              {% if movie.title  == director.imdb %}
-                <div class="card-subtitle"><a href="{{ director.profile }}">Director: {{ director.name }}</a></div>
-              {% endif %}
-            {% endfor %}
-          </div> <!-- ends card -->
-        </div> <!-- ends col 12 for card -->
-    {% if loop.index % 3 == 0 or loop.length == loop.index %}
-    </div> <!-- ends row for card -->
-    {% endif %}
-  {% endfor %}
+  <div class="row">
+      <div class="col-md-4 offset-md-4">
+        <h2>Search for movies in theaters</h2>
+          {{ wtf.quick_form(form) }}
 
-</div> <!-- ends container !-->
+  </div>
+
 {% endblock %}
